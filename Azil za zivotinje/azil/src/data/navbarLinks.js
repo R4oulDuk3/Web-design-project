@@ -1,0 +1,5 @@
+const navbarLinks ={
+    route:"",
+    id:"",
+    
+}

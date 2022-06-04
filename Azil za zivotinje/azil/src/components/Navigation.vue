@@ -6,31 +6,31 @@
     <span class="text-muted">Toggleable via the navbar brand.</span>
   </div>
 </div>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg fixed-topp navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Azil</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse center" id="navbarNav">
-      <ul class="navbar-nav ">
-        <li class="nav-item">
-          <router-link to="/"><a class="nav-link" href="#">Pocetna</a></router-link>
+      <ul class="navbar-nav">
+        <li class="nav-item" @click="select('pocetna')">
+          <router-link to="/"><a class="nav-link" id="pocetna" href="#">Pocetna</a></router-link>
         </li>
-        <li class="nav-item">
-         <router-link to="/zivotinje"><a class="nav-link" href="#">Zivotinje</a></router-link>
+        <li class="nav-item" @click="select('zivotinje')" >
+         <router-link to="/zivotinje"><a class="nav-link" id="zivotinje" href="#">Zivotinje</a></router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/izgubljeniLjubimci"><a class="nav-link" href="#">Izgubljeni Ljubimci</a></router-link>
+        <li class="nav-item" @click="select('izgubljeniLjubimci')" >
+          <router-link to="/izgubljeniLjubimci"><a class="nav-link" id="izgubljeniLjubimci" href="#">Izgubljeni Ljubimci</a></router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/dodajOglas"><a class="nav-link" href="#">Dodaj oglas</a></router-link>
+        <li class="nav-item" @click="select('dodajOglas')">
+          <router-link to="/dodajOglas"><a class="nav-link" id="dodajOglas" href="#">Dodaj oglas</a></router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/mojNalog"><a class="nav-link" href="#">Moj Nalog</a></router-link>
+        <li class="nav-item" @click="select('mojNalog')">
+          <router-link to="/mojNalog"><a class="nav-link" id="mojNalog" href="#">Moj Nalog</a></router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/oNama"><a class="nav-link" href="#">O Nama</a></router-link>
+        <li class="nav-item" @click="select('oNama')">
+          <router-link to="/oNama"><a class="nav-link" id="oNama" href="#">O Nama</a></router-link>
         </li>
       </ul>
     </div>
@@ -56,15 +56,33 @@
         font-size: 24px;
         color:black !important;
     }
+    .nav-link-selected{
+        font-size: 24px;
+        color:black !important;
+    }
     .navbar-brand{
-        font-size: 32px;
+        font-size: 40px;
     }
 
 </style>
 
 <script>
+import $ from "jquery";
  export default{
-     name:"Navigation"
+     name:"Navigation",
+     data(){
+         return {
+            currSelected:-1,
+         }
+     },
+     methods: {
+        select(idElem){
+            console.log("select")
+            console.log(idElem+"  aa")
+            $(".nav-link").removeClass("nav-link-selected")
+            $("#"+idElem).addClass("nav-link-selected")
+        }
+     },
 }
 
 </script>
