@@ -1,4 +1,4 @@
-# azil-za-zivotinje
+# azil
 
 ## Project setup
 ```
