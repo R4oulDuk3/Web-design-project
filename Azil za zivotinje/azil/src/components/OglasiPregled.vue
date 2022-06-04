@@ -1,11 +1,26 @@
 <template>
     <div>
-        <div v-for="oglas in sviOglasi" :key="oglas">
-            <Oglas :oglas="oglas"></Oglas>
-        </div>
+
+            <div class="center grid">
+                <div v-for="oglas in sviOglasi" :key="oglas">
+                    <Oglas :oglas="oglas"></Oglas>
+                </div>
+            </div>
+        
     </div>
     
 </template>
+
+<style>
+    .grid{
+        display: grid;
+        grid-gap: 20px 10px;
+        grid-template-columns: auto;
+        grid-auto-rows: 1fr
+    }
+
+</style>
+    
 
 <script>
 import oglasi from "../data/oglasi.js"
