@@ -6,9 +6,9 @@
     <span class="text-muted">Toggleable via the navbar brand.</span>
   </div>
 </div>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-light my-bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Azil</a>
+    <a class="navbar-brand" href="#">Woof</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -40,7 +40,7 @@
 </template>
 
 <style>
-    .bg-light{
+    .my-bg-light{
         background-color: white !important;
     }
     .center{
@@ -49,19 +49,21 @@
     }
     a:link { text-decoration: none; }
     .nav-link{
-        font-size: 22px;
-        color:darkgray !important;
+        font-size: 28px;
+        color:black !important;
+        font-family: 'Ubuntu', sans-serif;
     }
     .nav-link:hover{
-        font-size: 24px;
-        color:black !important;
+        font-size: 30px;
+        color: rgb(113, 180, 141) !important;
     }
     .nav-link-selected{
-        font-size: 24px;
-        color:black !important;
+        font-size: 32px;
+        color:rgb(113, 180, 141) !important;
     }
     .navbar-brand{
-        font-size: 40px;
+        font-size: 42px !important;
+        font-family: 'Fredoka One', cursive;
     }
 
 </style>

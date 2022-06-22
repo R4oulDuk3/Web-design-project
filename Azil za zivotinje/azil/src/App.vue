@@ -1,6 +1,7 @@
 <template>
   <Navigation></Navigation>
   <router-view/>
+  <MyFooter></MyFooter>
 </template>
 
 <style lang="less">
@@ -29,10 +30,12 @@ nav {
 <script>
 
 import Navigation from './components/Navigation.vue'
+import MyFooter from './components/MyFooter.vue'
   export default{
     name:"App",
     components:{
     Navigation,
+    MyFooter
 }
   }
 
