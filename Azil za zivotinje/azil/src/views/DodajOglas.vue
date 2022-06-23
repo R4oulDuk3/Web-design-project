@@ -6,7 +6,7 @@
                     <div class="createOglas">
                         <div class="info">
                             <h1 class="info">Izgubili ste ljubimca?</h1>
-                            <h2 class="info">Dozvolite da pomognemo u našom širokom mrežom ljubitelja životinja</h2>
+                            <h2 class="info">Dozvolite da pomognemo našom širokom mrežom ljubitelja životinja</h2>
                         </div>
                         <div class="center-text">
                             <table class="mytable">
@@ -18,7 +18,7 @@
                                         <td><h2>Opis</h2><textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Unesite opis ljubimca" v-model="opis" ></textarea></td>
                                     </tr>
                                     <tr>
-                                        <td><h2>Broj telefona</h2><input type="text" class="form-control" placeholder="Unesite Naslov/naziv ljubimca" v-model="telefon" > </td>
+                                        <td><h2>Broj telefona</h2><input type="text" class="form-control" placeholder="Unesite broj telefona" v-model="telefon" > </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
@@ -74,7 +74,7 @@
         margin: 1rem;
     }
     textarea {
-        resize: none;
+        resize: none !important;
     }
     button{
         margin-top: 1rem !important;
@@ -104,9 +104,20 @@
         },
         methods:{
             dodajOglas(){
-                console.log(this.naslov)
-                console.log(this.opis)
-                console.log(this.telefon)
+                let sviOglasi = JSON.parse(localStorage.getItem("oglasi"))
+
+                sviOglasi.push(
+                    {
+                        idCreator: this.currentUser.idUser,
+                        creatorName: this.currentUser.username,
+                        description: this.opis,
+                        title: this.naslov,
+                        imgPath: "dog.jpg",
+                        tel: this.telefon,
+                        comments:[]
+                    }
+                )
+                localStorage.setItem("oglasi", JSON.stringify(sviOglasi))
             }
         }
 

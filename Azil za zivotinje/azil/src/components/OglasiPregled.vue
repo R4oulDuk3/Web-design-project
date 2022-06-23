@@ -41,6 +41,7 @@ import Oglas from "../components/Oglas.vue"
                 localStorage.setItem("oglasi",JSON.stringify(oglasi))
             }
             this.sviOglasi = JSON.parse(localStorage.getItem("oglasi"))
+            
         }
     }
 
