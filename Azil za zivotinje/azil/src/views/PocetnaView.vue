@@ -66,11 +66,14 @@
 
 
 <style>
+#hero{
+    max-width: 100%;
+}
 .custom-shape-divider-bottom-1655841065 {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100.9%;
+    width: 100%;
     overflow: hidden;
     line-height: 0;
 }
@@ -78,7 +81,7 @@
 .custom-shape-divider-bottom-1655841065 svg {
     position: relative;
     display: block;
-    width: calc(164% + 1000.3px);
+    width: 100%;
     height: 100px;
     transform: rotateY(180deg);
 }
@@ -182,7 +185,7 @@
 .custom-shape-divider-top-1655817214 svg {
     position: relative;
     display: block;
-    width: calc(127% + 1.3px);
+    width: 100%;
     height: 96px;
 }
 
@@ -201,7 +204,7 @@
 .custom-shape-divider-bottom-1655818722 svg {
     position: relative;
     display: block;
-    width: calc(127% + 1.3px);
+    width: 100%;
     height: 96px;
 }
 

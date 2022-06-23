@@ -2,7 +2,7 @@
     <div>
       <div class="footer-basic ">
         <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <div class="social"><a href="#"><i class="lab la-instagram"></i></a><a href="#"><i class="lab la-snapchat"></i></a><a href="#"><i class="lab la-twitter"></i></a><a href="#"><i class="lab la-facebook-f"></i></a></div>
             <p class="copyright">Copyright Marina i Gavrilo, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu</p>
         </footer>
     </div>

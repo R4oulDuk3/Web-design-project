@@ -13,6 +13,7 @@
 
 <style>
     .grid{
+        margin-top: 1.5rem;
         display: grid;
         grid-gap: 20px 10px;
         grid-template-columns: auto;
