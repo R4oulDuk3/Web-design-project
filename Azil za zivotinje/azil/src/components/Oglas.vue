@@ -1,7 +1,7 @@
 
 
 <template>
-    <div>
+    <div v-if="!deleted">
         <div class="card mb-3">
         <div class="row g-0">
             <div class="col-lg-7 col-sm-12">
@@ -17,7 +17,8 @@
                                     <h4 class="tel">{{oglas.tel}}</h4>
                                 </div>
                         </div>
-                        <i class="las la-file-pdf pdf"></i>
+                        <i class="las la-file-pdf pdf" v-if="!this.$props.deletable" @click="toPDF()"></i>
+                        <i class="las la-trash pdf" v-if="this.$props.deletable" @click="deleteOglas()"></i>
                     </div>
 
                     <div class="post-content">
@@ -30,8 +31,8 @@
                         </div>
                     </div>
                     <div class="create-comment-div">
-                        <textarea type="text" class="input" placeholder="Write a comment" v-model="newItem" @keyup.enter="addItem()"></textarea>
-                        <button type="button" class="btn btn-light">Add comment</button>
+                        <textarea type="text" class="input" placeholder="Write a comment" v-model="comment"></textarea>
+                        <button type="button" class="btn btn-light" @click="addComment()">Add comment</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +71,8 @@
         margin-left: 1.5rem;
         margin-top: 0.5rem;
         overflow: auto;
-        max-height: 400px;
+        min-height: 200px;
+        max-height: 200px;
     }
     .create-comment-div{
         padding-top:1rem;
@@ -96,6 +98,7 @@
     }
     .img-fluid{
         height: 100% !important;
+        
     }
     .tel{
         font-size: 18px;
@@ -130,7 +133,82 @@
         components:{
             Comment
         },
-        props:["oglas"],
+        props:[
+            "oglas",
+            "deletable"
+            
+            ],
+        created(){
+            if(localStorage.getItem("currentUser")==null){
+                localStorage.setItem("currentUser",JSON.stringify({
+                    idUser: "3",
+                    username:"Mirko"
+                }))
+            }
+            this.currentUser = JSON.parse(localStorage.getItem("currentUser"))
+        },
+        data(){
+            return {
+                comment:null,
+                currentUser:{},
+                deleted:false
+            }
+        },
+        methods:{
+            removeItemOnce(arr, value) {
+                var index = arr.indexOf(value);
+                
+                if (index > -1) {
+                    arr.splice(index, 1);
+                    console.log("deleted")
+                }
+                return arr;
+            },
+            addComment(){
+                console.log("works")
+                this.$props.oglas.comments.push(
+                    {
+                        idCreator:this.currentUser.idUser,
+                        creatorName: this.currentUser.username,
+                        comment: this.comment
+                    }
+                )
+
+                let sviOglasi = JSON.parse(localStorage.getItem("oglasi"))
+                for(let oglas of sviOglasi){
+                    if(oglas.idOglas == this.$props.oglas.idOglas){
+                        oglas.comments.push({
+                            idCreator:this.currentUser.idUser,
+                            creatorName: this.currentUser.username,
+                            comment: this.comment                           
+                        })
+                    }
+                }
+                localStorage.setItem("oglasi",JSON.stringify(sviOglasi))
+            },
+            deleteOglas(){
+                let sviOglasi = JSON.parse(localStorage.getItem("oglasi"))
+                for(let oglas of sviOglasi){
+                    console.log(oglas.idOglas)
+                    console.log(this.$props.oglas.idOglas)
+                    if(oglas.idOglas==this.$props.oglas.idOglas){
+                        this.removeItemOnce(sviOglasi, oglas)
+                        break
+                    }
+                }
+                localStorage.setItem("oglasi",JSON.stringify(sviOglasi))
+                console.log("delete")
+                this.deleted=true
+//                this.close()
+            },
+            toPDF(){
+                console.log("TOPDF")
+            },
+            close() {
+                this.$destroy();
+                this.$el.parentNode.removeChild(this.$el);
+                }
+        }
 
     }
 </script>

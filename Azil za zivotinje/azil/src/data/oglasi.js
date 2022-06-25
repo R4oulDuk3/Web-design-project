@@ -1,4 +1,5 @@
 var oglasi =[ {
+    idOglas:"1",
     idCreator:"1",
     creatorName: "Gavrilo",
     description:"Pas se zove cane i mnogo je dobar pas i bas je sladak i previse voli da se mazi",
@@ -54,6 +55,7 @@ var oglasi =[ {
     ]
     
 },{
+    idOglas:"2",
     idCreator:"2",
     creatorName: "Cone",
     description:"Nestao pas",
@@ -73,6 +75,7 @@ var oglasi =[ {
         },
     ]
 },{
+    idOglas:"3",
     idCreator:"2",
     creatorName: "Pavle",
     description:"Nestao pas",
@@ -92,6 +95,7 @@ var oglasi =[ {
         },
     ]
 },{
+    idOglas:"4",
     idCreator:"2",
     creatorName: "Kolja",
     description:"Nestao pas",

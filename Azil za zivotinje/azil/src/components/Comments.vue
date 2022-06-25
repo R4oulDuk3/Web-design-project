@@ -1,12 +1,10 @@
 <template>
     <div>
-
-            <div class="center grid">
-                <div v-for="oglas in sviOglasi" :key="oglas">
-                    <Oglas :oglas="oglas" :deletable="this.$props.deletable"></Oglas>
-                </div>
+        <div class="center grid">
+            <div v-for="comment in comments" :key="comment">
+                <Comment :comment="comment"></Comment>
             </div>
-        
+        </div>
     </div>
     
 </template>
@@ -24,15 +22,14 @@
     
 
 <script>
-import Oglas from "../components/Oglas.vue"
+import Comment from "../components/Comment.vue"
     export default{
-        name:"OglasiPregled",
+        name:"Comments",
         components:{
-            Oglas
+            Comment
         },
         props:[
-            'sviOglasi',
-            'deletable'
+            'comments',
         ]
         
     }
