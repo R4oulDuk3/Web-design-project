@@ -1,7 +1,10 @@
 <template>
-  <Navigation></Navigation>
+<div>
+   <Navigation></Navigation>
   <router-view/>
   <MyFooter></MyFooter>
+</div>
+ 
 </template>
 
 <style lang="less">
