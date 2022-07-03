@@ -17,8 +17,13 @@
         <li class="nav-item" @click="select('pocetna')">
           <router-link to="/"><a class="nav-link" id="pocetna" href="#">Pocetna</a></router-link>
         </li>
-        <li class="nav-item" @click="select('zivotinje')" >
-         <router-link to="/zivotinje"><a class="nav-link" id="zivotinje" href="#">Zivotinje</a></router-link>
+        <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="animalsDrop" data-bs-toggle="dropdown" href="#"><i class="fa fa-paw"></i>Zivotinje</a>
+              <ul class="dropdown-menu" id="hoverDropdown" aria-labelledby="animalsDrop">
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Kuce" @click="select('zivotinjeP')"  >Kuce</router-link></li>
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Mace" @click="select('zivotinjeM')">Mace</router-link></li>
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Ptice" @click="select('zivotinjePt')" >Ptice</router-link></li>
+              </ul>
         </li>
         <li class="nav-item" @click="select('izgubljeniLjubimci')" >
           <router-link to="/izgubljeniLjubimci"><a class="nav-link" id="izgubljeniLjubimci" href="#">Izgubljeni Ljubimci</a></router-link>
@@ -65,7 +70,13 @@
         font-size: 42px !important;
         font-family: 'Fredoka One', cursive;
     }
-
+  .dropdown-item{
+    align-content: center;
+    display:flex;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px; 
+  }
 </style>
 
 <script>
