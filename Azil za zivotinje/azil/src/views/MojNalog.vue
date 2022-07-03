@@ -23,7 +23,7 @@
                             <Comments :oglasComments="oglasComments">
                             </Comments>
                         </div>
-                        <div v-if="this.komentariPoOglasima.length==0">
+                        <div v-if="Object.keys(this.komentariPoOglasima).length==0">
                             <h2>Niste objavili nijedan komentar!</h2>
                         </div>
                     </div>

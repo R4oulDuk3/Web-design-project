@@ -1,5 +1,6 @@
 <template>
   <Navigation></Navigation>
+
   <router-view/>
   <MyFooter></MyFooter>
 </template>
@@ -11,6 +12,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.margin-top{
+  margin-top: 5rem;
 }
 
 nav {
@@ -31,12 +35,18 @@ nav {
 
 import Navigation from './components/Navigation.vue'
 import MyFooter from './components/MyFooter.vue'
+
   export default{
     name:"App",
     components:{
     Navigation,
-    MyFooter
-}
+    MyFooter,
+  },
+  data(){
+    return{
+      crumbs: ['Home', 'Category','Sub category'],
+    }
+  }
   }
 
 

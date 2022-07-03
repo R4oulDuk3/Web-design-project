@@ -19,8 +19,20 @@
         <li class="nav-item" @click="select('pocetna')">
           <router-link to="/"><a class="nav-link" id="pocetna" href="#">Početna</a></router-link>
         </li>
-        <li class="nav-item" @click="select('zivotinje')" >
-         <router-link to="/zivotinje"><a class="nav-link" id="zivotinje" href="#">Životinje</a></router-link>
+        <li class="nav-item dropdown">
+              <!-- <router-link class="dropdown-item" to="/SveZivotinje"  ><a class="nav-link dropdown-toggle" id="animalsDrop" data-bs-toggle="dropdown" href="#"><i class="fa fa-paw"></i>Zivotinje</a></router-link> -->
+              <div class="flex-b">
+                <router-link to="/SveZivotinje"><a class="nav-link" id="SveZivotinje" href="#" @click="select('SveZivotinje')">Životinje</a></router-link>
+                <button type="button" class="btn btn-lg dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" id="hoverDropdown" aria-labelledby="animalsDrop">
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Kuce" @click="select('SveZivotinje')"  >Kuce</router-link></li>
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Mace" @click="select('SveZivotinje')">Mace</router-link></li>
+                <li><router-link class="dropdown-item" to="/SveZivotinje/Ptice" @click="select('SveZivotinje')" >Ptice</router-link></li>
+              </ul>
+              </div>
+              
         </li>
         <li class="nav-item" @click="select('izgubljeniLjubimci')" >
           <router-link to="/izgubljeniLjubimci"><a class="nav-link" id="izgubljeniLjubimci" href="#">Izgubljene Životinje</a></router-link>
@@ -44,6 +56,10 @@
 </template>
 
 <style>
+    .flex-b{
+      display: flex;
+      justify-content: center;
+    }
     .my-bg-light{
         background-color: white !important;
     }
@@ -123,13 +139,3 @@ import $ from "jquery";
 }
 
 </script>
-
-<!-- <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/pocetna">Pocetna</router-link>
-        <router-link to="/zivotinje">Zivotinje</router-link> |
-        <router-link to="/izgubljeniLjubimci">Izgubljeni Ljubimci</router-link>
-        <router-link to="/dodajOglas">Dodaj oglas</router-link> |
-        <router-link to="/mojNalog">Moj Nalog</router-link>
-        <router-link to="/oNama">O Nama</router-link>
-  </nav> -->
