@@ -1,13 +1,13 @@
 
 
 <template>
-    <div v-if="!deleted">
+    <div v-if="!deleted" :class="{ notprintable: !printable }">
         <div class="card mb-3">
         <div class="row g-0">
-            <div class="col-lg-7 col-sm-12">
-                <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb"  class="img-fluid rounded-start" alt="greska">
+            <div class="col-lg-6 col-sm-12">
+                <img v-bind:src="oglas.imgPath"  class="img-fluid rounded-start img" alt="greska">
             </div>
-            <div class="col-lg-5 col-sm-12 card-div">
+            <div class="col-lg-6 col-sm-12 card-div">
                 <div class="card-body">
                     <div class="user-bar">
                         <div class="user">
@@ -17,20 +17,20 @@
                                     <h4 class="tel">{{oglas.tel}}</h4>
                                 </div>
                         </div>
-                        <i class="las la-file-pdf pdf" v-if="!this.$props.deletable" @click="toPDF()"></i>
-                        <i class="las la-trash pdf" v-if="this.$props.deletable" @click="deleteOglas()"></i>
+                        <i class="las la-file-pdf pdf notprintable" v-if="this.$props.canprint" @click="toPDF()"></i>
+                        <i class="las la-trash pdf notprintable" v-if="this.$props.deletable" @click="deleteOglas()"></i>
                     </div>
 
                     <div class="post-content">
                         <h5 class="card-title">{{oglas.title}}</h5>
                         <p class="card-text">{{oglas.description}}</p>
                     </div>
-                    <div class="comments">
+                    <div class="comments notprintable">
                         <div v-for="comment in oglas.comments" :key="comment">
                             <Comment :comment="comment"></Comment>
                         </div>
                     </div>
-                    <div class="create-comment-div">
+                    <div class="create-comment-div notprintable">
                         <textarea type="text" class="input" placeholder="Write a comment" v-model="comment"></textarea>
                         <button type="button" class="btn btn-light" @click="addComment()">Add comment</button>
                     </div>
@@ -42,6 +42,9 @@
 </template>
 
 <style>
+.card{
+    width: 100%;
+}
     .pdf{
         font-size: 45px;
         cursor: pointer;
@@ -71,14 +74,15 @@
         margin-left: 1.5rem;
         margin-top: 0.5rem;
         overflow: auto;
-        min-height: 200px;
-        max-height: 200px;
+        min-height: 150px;
+        max-height: 150px;
     }
     .create-comment-div{
         padding-top:1rem;
         border-top:1px solid lightgray;
         
     }
+    
     .card-body{
         display: flex !important;
         flex-direction: column !important;
@@ -124,9 +128,38 @@
         font-weight: bold;
         text-align: left;
     }
+    .img{
+            border-radius: 0px !important;
+        }
+    @media print {
+
+        .notprintable{
+            display: none !important;
+        }
+        .notprintable *{
+            display: none !important; 
+        }
+        .img{
+            max-height: 300px;
+        }
+        .card-body{
+            max-height: 300px;
+        }
+            .comments{
+        flex: 1;
+        overflow: auto;
+        margin-left: 1.5rem;
+        margin-top: 0.5rem;
+        overflow: auto;
+        min-height: 200px;
+        max-height: 200px;
+    }
+        
+}
 </style>
 
 <script>
+    import $ from 'jquery'
     import Comment from "../components/Comment.vue"
     export default{
         name:"Oglas",
@@ -135,7 +168,8 @@
         },
         props:[
             "oglas",
-            "deletable"
+            "deletable",
+            "canprint"
             
             ],
         created(){
@@ -151,7 +185,8 @@
             return {
                 comment:null,
                 currentUser:{},
-                deleted:false
+                deleted:false,
+                printable:false
             }
         },
         methods:{
@@ -178,6 +213,7 @@
                 for(let oglas of sviOglasi){
                     if(oglas.idOglas == this.$props.oglas.idOglas){
                         oglas.comments.push({
+                            idOglas: oglas.idOglas,
                             idCreator:this.currentUser.idUser,
                             creatorName: this.currentUser.username,
                             comment: this.comment                           
@@ -202,8 +238,48 @@
 //                this.close()
             },
             toPDF(){
-                console.log("TOPDF")
+                this.printable=true
+                setTimeout(()=>{
+                    $('.notprintable').parent().hide()
+                    print()
+                    $('.notprintable').parent().show()
+                    this.printable=false
+                    },5)
             },
+            printDiv(divToPrint) 
+                {
+
+                
+
+                var newWin=window.open('','Print-Window');
+
+                newWin.document.open();
+                console.log(divToPrint)
+                newWin.document.write('<html><body onload="window.print()">'+divToPrint+'</body></html>');
+                newWin.print()
+                newWin.document.close();
+                newWin.close();
+
+                },
+            printElem(elem)
+                {
+                    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+                    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+                    mywindow.document.write('</head><body >');
+                    mywindow.document.write('')
+                    mywindow.document.write('<h1>' + document.title  + '</h1>');
+                    mywindow.document.write(elem);
+                    mywindow.document.write('</body></html>');
+
+                    mywindow.document.close(); // necessary for IE >= 10
+                    mywindow.focus(); // necessary for IE >= 10*/
+
+                    mywindow.print();
+                    mywindow.close();
+
+                    return true;
+                },
             close() {
                 this.$destroy();
                 this.$el.parentNode.removeChild(this.$el);

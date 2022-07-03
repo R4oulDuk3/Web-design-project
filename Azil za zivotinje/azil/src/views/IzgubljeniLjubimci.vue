@@ -1,7 +1,7 @@
 <template>
     <div class="center">
         <div class="main-content">
-            <OglasiPregled :sviOglasi="this.oglasi" :deletable="false"></OglasiPregled>
+            <OglasiPregled :sviOglasi="this.oglasi" :canprint="true" :deletable="false"></OglasiPregled>
         </div>
     </div>
 </template>
@@ -29,6 +29,8 @@ export default{
         }
     },
     created(){
+            localStorage.setItem('page','izgubljeniLjubimci')
+            document.title = "Izgubljene životinje"
             if(localStorage.getItem("oglasi")==null){
                 localStorage.setItem("oglasi",JSON.stringify(oglasi))
             }

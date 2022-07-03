@@ -12,7 +12,7 @@
                 <div class="info">
                     <div class="naslov-div">
                         <h1 class="naslov">Azil&nbsp;</h1>
-                        <h1 class="naslov2">Woof</h1>
+                        <h1 class="naslov2" translate="no">Woof</h1>
                     </div>
                     
                     <h2 class="opis">Skloniste za nase krznene prijatelje</h2>
@@ -28,44 +28,109 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="quote">“Until one has loved an animal, a part of one’s soul remains unawakened.”</h1>
+                    <h1 class="quote" translate="no">“Until one has loved an animal, a part of one’s soul remains unawakened.”</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h2 class="author">-Anatole France</h2>
+                    <h2 class="author" translate="no">-Anatole France</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-bg-12">
+                <div class="col-md-12 col-lg-6 ">
                     <div class="intro-section">
                         <div class="naslov-div">
-                    <h2 class="intro-naslov-1">Dobrodosli u &nbsp;</h2>
-                    <h2 class="intro-naslov-2">Woof</h2>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime ea sit libero dicta facilis sapiente velit id molestias natus soluta.</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias a delectus hic asperiores saepe sit expedita. Molestias et recusandae facere?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, quasi qui odit dolores illum a delectus maiores voluptatum fuga deserunt!</p>
+                            <h2 class="intro-naslov-1">Dobrodosli u &nbsp;</h2>
+                            <h2 class="intro-naslov-2">Woof</h2>
+                        </div>
+                        <br>
+                        <div>
+                            <h3 class="podnaslov">Misija</h3>
+                            <p class="ptext">Da se unapredi bezbednost i dobrobit životinja</p>
+                            <h3 class="podnaslov">Vizija</h3>
+                            <p class="ptext">Naša vizija je da sve životinje žive život bez okrutosti i patnje</p>
+                            <h3 class="podnaslov">Vrednosti</h3>
+                            <p class="ptext">Najpre vrednujemo ljubav, poštovanje, saosećanje, svest i integritet u svim aspektima naše misije i vizije za svet bez okrutnosti</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-bg-12">
+                <div class=" col-md-12 col-lg-6">
                     <section class="corgi-section">
                         <img class="img" src="https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg" alt="aaa">
-                        <div class="custom-shape-divider-bottom-1655841065">
+                        <!-- <div class="custom-shape-divider-bottom-1655841065">
                             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                                 <path d="M741,116.23C291,117.43,0,27.57,0,6V120H1200V6C1200,27.93,1186.4,119.83,741,116.23Z" class="shape-fill"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </section>
                     
                 </div>
+
             </div>
+            <div class="row">
+                <div class="col">
+                    
+                    <Carousel></Carousel>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1 class="vesti">Oglasi</h1>
+                    <OglasiPregled :sviOglasi="this.oglasi" :deletable="false" :canprint="false"></OglasiPregled>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
 
+<script>
+    import Carousel from "../components/Carousel.vue"
+    import OglasiPregled from "../components/OglasiPregled.vue"
+    import oglasi from '@/data/oglasi'
+export default{
+
+    name: "PocetnaView",
+    components: {Carousel,OglasiPregled},
+    data(){
+        return {
+            oglasi:[]
+        }
+    },
+    created(){
+        document.title = "Početna"
+        localStorage.setItem('page','pocetna')
+        console.log('poceta!!')
+        if(localStorage.getItem("oglasi")==null){
+                localStorage.setItem("oglasi",JSON.stringify(oglasi))
+            }
+        let svi_oglasi = JSON.parse(localStorage.getItem("oglasi"))
+        for(let i = svi_oglasi.length-3;i<svi_oglasi.length;i++){
+            this.oglasi.push(svi_oglasi[i])
+        }
+        console.log(this.oglasi)
+
+    }
+}
+
+</script>
 
 <style>
+.center-div{
+    display: flex;
+    justify-content: center;
+}
+.ptext{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+}
+.podnaslov{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+}
 #hero{
     max-width: 100%;
 }
@@ -121,16 +186,17 @@
     .img{
         width: 100%;
         border-radius: 20px;
+        height: 100%;
     }
-    .intro-section{
+    /* .intro-section{
         margin-top: 2rem !important;
-    }
+    } */
     .naslov-div{
         display: flex;
         align-items: flex-end;
     }
     .naslov{
-        font-family: 'Fredoka One', cursive;
+        font-family: 'Titan One', cursive;
         font-size: 68px;
         color: white;
         text-align: left;
@@ -144,7 +210,8 @@
     .opis{
         font-size: 42px;
         color: white;
-        font-family: 'Fredoka One', cursive;
+        font-family: 'Titan One', cursive;
+        margin-bottom: 5rem;
     }
 
     #hero{
@@ -214,3 +281,5 @@
 
 
 </style>
+
+

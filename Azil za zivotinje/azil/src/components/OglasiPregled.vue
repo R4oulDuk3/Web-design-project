@@ -1,9 +1,9 @@
 <template>
     <div>
 
-            <div class="center grid">
+            <div class="center grid shrink">
                 <div v-for="oglas in sviOglasi" :key="oglas">
-                    <Oglas :oglas="oglas" :deletable="this.$props.deletable"></Oglas>
+                    <Oglas :oglas="oglas" :deletable="this.$props.deletable" :canprint="this.$props.canprint" ref="foo" class="shrink"></Oglas>
                 </div>
             </div>
         
@@ -12,6 +12,10 @@
 </template>
 
 <style>
+    .shrink > div{
+        display: inline-block;
+        height: auto;
+    }
     .grid{
         margin-top: 1.5rem;
         display: grid;
@@ -19,6 +23,12 @@
         grid-template-columns: auto;
         grid-auto-rows: 1fr
     }
+        /* @media print {
+
+        .notprintable{
+            display: none !important;
+        }      
+    } */
 
 </style>
     
@@ -32,7 +42,8 @@ import Oglas from "../components/Oglas.vue"
         },
         props:[
             'sviOglasi',
-            'deletable'
+            'deletable',
+            'canprint'
         ]
         
     }

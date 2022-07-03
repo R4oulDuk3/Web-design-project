@@ -1,15 +1,36 @@
 <template>
     <div class="mojNalog">
-        <div class="buttons">
-            <button class="button left" :class="{selected:this.showOglasi}" @click="this.showComments=false;this.showOglasi=true">Moji Oglasi</button>
-            <button class="button right" :class="{selected:this.showComments}" @click="this.showComments=true;this.showOglasi=false">Moji komentari</button>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="buttons">
+                        <button class="button left" :class="{selected:this.showOglasi}" @click="this.showComments=false;this.showOglasi=true">Moji Oglasi</button>
+                        <button class="button right" :class="{selected:this.showComments}" @click="this.showComments=true;this.showOglasi=false">Moji komentari</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div  v-if="showOglasi">
+                        <OglasiPregled :sviOglasi="this.mojiOglasi" :deletable="true" :canprint="false">
+                        </OglasiPregled>
+                        <div v-if="this.mojiOglasi.length==0">
+                            <h2>Niste objavili nijedan oglas!</h2>
+                        </div>
+                    </div>
+                    <div v-if="showComments" class="comments-wrapper">
+                        <div v-for="oglasComments in this.komentariPoOglasima" :key="oglasComments">
+                            <Comments :oglasComments="oglasComments">
+                            </Comments>
+                        </div>
+                        <div v-if="this.komentariPoOglasima.length==0">
+                            <h2>Niste objavili nijedan komentar!</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        <OglasiPregled :sviOglasi="this.mojiOglasi" :deletable="true" v-if="showOglasi">
-        </OglasiPregled>
-        <Comments :comments="this.mojiKomentari" v-if="showComments">
-
-        </Comments>
-
     </div>
 </template>
 
@@ -20,6 +41,9 @@
     }
     .buttons{
         
+    }
+    .comments-wrapper{
+        margin-top: 2rem;
     }
     .button{
         background: lightgray;
@@ -65,9 +89,13 @@ export default{
             currentUser:null,
             showOglasi:true,
             showComments:false,
+            komentariPoOglasima:null
         }
     },
     created(){
+        localStorage.setItem('page','mojNalog')
+        document.title = "Moj Nalog"
+    
         if(localStorage.getItem("currentUser")==null){
                 localStorage.setItem("currentUser",JSON.stringify({
                     idUser: "3",
@@ -86,8 +114,25 @@ export default{
                 }
             }
         }
-        console.log(this.mojiOglasi)
-        console.log(this.mojiKomentari)
+        this.komentariPoOglasima ={}
+        for(let comment of this.mojiKomentari){
+            if(comment.idOglas in this.komentariPoOglasima){
+                this.komentariPoOglasima[comment.idOglas].comments.push(comment)
+            }else{
+                let oglas = sviOglasi.find(element => element.idOglas == comment.idOglas);
+                this.komentariPoOglasima[comment.idOglas]={
+                    tel: oglas.tel,
+                    creatorName: oglas.creatorName,
+                    title: oglas.title,
+                    description: oglas.description,
+                    comments: []
+                }
+                this.komentariPoOglasima[comment.idOglas].comments.push(comment)
+            }
+        }
+        console.log("Komentari po oglasima")
+        console.log(this.komentariPoOglasima)
+
     },
     methods:{
 

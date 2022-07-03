@@ -4,11 +4,11 @@
             <div class="col-12">
                 <div class="dodajOglas">
                     <div class="createOglas">
-                        <div class="info">
-                            <h1 class="info">Izgubili ste ljubimca?</h1>
-                            <h2 class="info">Dozvolite da pomognemo našom širokom mrežom ljubitelja životinja</h2>
+                        <div class="info-form">
+                            <h1>Izgubili ste ljubimca?</h1>
+                            <h2>Dozvolite da pomognemo našom širokom mrežom ljubitelja životinja</h2>
                         </div>
-                        <div class="center-text">
+                        <div class="center-text myform">
                             <table class="mytable">
                                 <tbody>
                                     <tr>
@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <button type="submit" class="btn btn-primary" @click="dodajOglas()">
+                                            <button type="submit" class="btn submit-button" @click="dodajOglas()">
                                             <h3 v-if="!showLoading" class="button-text">Postavi</h3>
                                             <div v-if="showLoading" class="loading loading--full-height"></div>
                                             </button>
@@ -60,10 +60,14 @@
 
 
 <style>
+    .myform{
+        padding:1rem;
+    }
     .err-msg{
         color: red;
         font-size: 20px;
         text-align: left;
+        margin-top:0.2rem;
     }
     .center-text{
         display: flex;
@@ -74,6 +78,7 @@
     }
     .mytable{
         width: 80%;
+        margin-top:1rem;
     }
     td{
         border: 0px solid black !important;
@@ -85,7 +90,18 @@
         margin-top: 8rem;
         display: flex; 
         flex-direction: column;
-        height: 120vh !important;
+        height: 140vh !important;
+    }
+    .createOglas{
+        background: whitesmoke;
+        border-radius: 2rem;
+    }
+    .info-form{
+        background: rgb(113, 180, 141) !important;
+        padding: 1.5rem;
+        color:whitesmoke;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
     }
     .fill{
         flex: 1;
@@ -102,12 +118,14 @@
     textarea {
         resize: none !important;
     }
-    button{
+    .submit-button{
         margin-top: 1rem !important;
+        background: rgb(113, 180, 141) !important;
     }
     .button-text{
         font-size: 25px;
         margin: 0.5rem !important;
+        color: white;
     }
     .loading {
     display: flex;
@@ -206,6 +224,8 @@ import $ from "jquery";
             }
         },
         created(){
+            localStorage.setItem('page','dodajOglas')
+            document.title = "Dodaj oglas"
             $(".loading").hide()
             if(localStorage.getItem("currentUser")==null){
                 localStorage.setItem("currentUser",JSON.stringify({
@@ -247,7 +267,7 @@ import $ from "jquery";
                         creatorName: this.currentUser.username,
                         description: this.opis,
                         title: this.naslov,
-                        imgPath: "dog.jpg",
+                        imgPath: "https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
                         tel: this.telefon,
                         comments:[]
                     }

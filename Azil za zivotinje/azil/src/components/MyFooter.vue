@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="footer-basic ">
+      <div class="footer-basic notprintable">
         <footer>
             <div class="social"><a href="#"><i class="lab la-instagram"></i></a><a href="#"><i class="lab la-snapchat"></i></a><a href="#"><i class="lab la-twitter"></i></a><a href="#"><i class="lab la-facebook-f"></i></a></div>
             <p class="copyright">Copyright Marina i Gavrilo, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu</p>
